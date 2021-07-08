@@ -1,6 +1,8 @@
 package com.example.books.models;
 
-public class BooksModel {
+import java.io.Serializable;
+
+public class BooksModel implements Serializable {
     String title, description;
     int image;
 

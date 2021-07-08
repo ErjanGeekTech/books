@@ -2,6 +2,7 @@ package com.example.books.ui.books;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -11,6 +12,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,37 +28,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class BooksFragment extends Fragment   {
+public class BooksFragment extends Fragment {
 
     FragmentBooksBinding binding;
     BooksViewModel viewModel;
-    BooksAdapter adapter;
+    BooksAdapter adapter = new BooksAdapter();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentBooksBinding.inflate(inflater, container, false);
-        binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.rv.setAdapter(adapter);
-        initialize();
-        setupListener();
-        updateObserve();
-        onClick();
+        setupViews(inflater, container, false);
         return binding.getRoot();
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initialize();
+        setupRecycler();
+        setupListener();
+        updateObserve();
+        onClick();
+    }
+
+    private void setupViews(LayoutInflater inflater, ViewGroup container, boolean b) {
+        binding = FragmentBooksBinding.inflate(inflater, container, false);
+    }
+
+    private void setupRecycler() {
+        binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rv.setAdapter(adapter);
+    }
+
+
     private void setupListener() {
         binding.bntFill.setOnClickListener(v -> {
-          binding.bntFill.setVisibility(View.GONE);
-          viewModel.get();
+            binding.bntFill.setVisibility(View.GONE);
+            viewModel.get();
         });
     }
 
-    @Override
-    public void onCreate( Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        adapter = new BooksAdapter();
-    }
 
     private void updateObserve() {
         viewModel.getAll.observe(getViewLifecycleOwner(), booksModels -> {
@@ -69,13 +81,12 @@ public class BooksFragment extends Fragment   {
         viewModel = new ViewModelProvider(this).get(BooksViewModel.class);
     }
 
-//    @Override
     public void onClick() {
         adapter.setOnItemClick(new OnItemClick() {
             @Override
-            public void onClick(int position) {
+            public void onClick(BooksModel model) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("position", position);
+                bundle.putSerializable("model", model);
                 NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
                 navController.navigate(R.id.action_booksFragment_to_descriptionFragment, bundle);
             }

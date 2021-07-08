@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.books.R;
+import com.example.books.databinding.FragmentBooksBinding;
+import com.example.books.databinding.ItemBooksListBinding;
 import com.example.books.interfaces.OnItemClick;
 import com.example.books.models.BooksModel;
 
@@ -21,6 +23,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
    public static List<BooksModel> list = new ArrayList<>();
     OnItemClick onItemClick;
+    ItemBooksListBinding binding;
 
     public void setOnItemClick(OnItemClick onItemClick) {
         this.onItemClick = onItemClick;
@@ -28,9 +31,11 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
     @Override
     public BooksViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_books_list, parent, false);
-        return new BooksViewHolder(view);
+//        View view = LayoutInflater.from(parent.getContext())
+//                .inflate(R.layout.item_books_list, parent, false);
+        binding = ItemBooksListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+
+        return new BooksViewHolder(binding.getRoot());
     }
 
     @Override
@@ -50,18 +55,15 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
     }
 
     public class BooksViewHolder extends  RecyclerView.ViewHolder{
-        TextView title;
-        ImageView imageView;
         public BooksViewHolder( View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.txt_title);
-            imageView = itemView.findViewById(R.id.image_view);
+
         }
 
         public void bind(BooksModel booksModel) {
-            itemView.setOnClickListener(v -> onItemClick.onClick(getAdapterPosition()));
-            title.setText(booksModel.getTitle());
-            imageView.setImageResource(booksModel.getImage());
+            itemView.setOnClickListener(v -> onItemClick.onClick(booksModel));
+            binding.txtTitle.setText(booksModel.getTitle());
+            binding.imageView.setImageResource(booksModel.getImage());
         }
     }
 }
