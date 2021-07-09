@@ -38,7 +38,7 @@ public class BooksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        setupViews(inflater, container, false);
+        binding = FragmentBooksBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -50,10 +50,6 @@ public class BooksFragment extends Fragment {
         setupListener();
         updateObserve();
         onClick();
-    }
-
-    private void setupViews(LayoutInflater inflater, ViewGroup container, boolean b) {
-        binding = FragmentBooksBinding.inflate(inflater, container, false);
     }
 
     private void setupRecycler() {
@@ -78,17 +74,16 @@ public class BooksFragment extends Fragment {
     }
 
     private void initialize() {
-        viewModel = new ViewModelProvider(this).get(BooksViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(BooksViewModel.class);
     }
 
     public void onClick() {
         adapter.setOnItemClick(new OnItemClick() {
             @Override
             public void onClick(BooksModel model) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("model", model);
+                viewModel.getDescriptionModel(model);
                 NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-                navController.navigate(R.id.action_booksFragment_to_descriptionFragment, bundle);
+                navController.navigate(R.id.action_booksFragment_to_descriptionFragment);
             }
         });
     }

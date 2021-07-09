@@ -13,6 +13,11 @@ import java.util.List;
 public class BooksViewModel extends ViewModel {
     public MutableLiveData<List<BooksModel>> getAll = new MutableLiveData<>();
     List<BooksModel> list = new ArrayList<>();
+    public MutableLiveData<BooksModel> getModel = new MutableLiveData<>();
+
+    void getDescriptionModel(BooksModel model) {
+        getModel.setValue(model);
+    }
 
     void get() {
         list.add(new BooksModel("Цветы для Элджернона", "Элджернон — это мышь, которой в лабораторных условиях повысили уровень интеллекта. Вдохновленные успехом ученые-экспериментаторы решают опробовать свое открытие на людях. Их пациентом становится умственно отсталый Шарль. Эксперимент удается, и Шарль начинает жить нормальной жизнью. Он добивается успехов на научной ниве, влюбляется в девушку Алису. Однако вскоре он оказывается перед сложным выбором — оставаться «подопытным кроликом» или вновь стать самим собой.", R.drawable.algernon));

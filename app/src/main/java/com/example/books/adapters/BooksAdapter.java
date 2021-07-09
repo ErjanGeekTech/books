@@ -21,7 +21,7 @@ import java.util.List;
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHolder> {
 
-   public static List<BooksModel> list = new ArrayList<>();
+    List<BooksModel> list = new ArrayList<>();
     OnItemClick onItemClick;
     ItemBooksListBinding binding;
 
@@ -31,10 +31,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
     @Override
     public BooksViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
-//        View view = LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.item_books_list, parent, false);
         binding = ItemBooksListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-
         return new BooksViewHolder(binding.getRoot());
     }
 
