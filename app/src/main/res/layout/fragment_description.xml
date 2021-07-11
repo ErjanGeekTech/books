@@ -4,13 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/fon"
    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.description.DescriptionFragment">
+        tools:context=".ui.fragments.description.DescriptionFragment">
 
         <TextView
             android:id="@+id/txt_title"
@@ -18,6 +17,7 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:gravity="center"
+            app:layout_constrainedWidth="true"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"

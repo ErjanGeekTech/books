@@ -7,16 +7,21 @@
 
     <fragment
         android:id="@+id/booksFragment"
-        android:name="com.example.books.ui.books.BooksFragment"
-        android:label="fragment_books"
+        android:name="com.example.books.ui.fragments.books.BooksFragment"
+        android:label="Books"
         tools:layout="@layout/fragment_books" >
         <action
             android:id="@+id/action_booksFragment_to_descriptionFragment"
-            app:destination="@id/descriptionFragment" />
+            app:destination="@id/descriptionFragment"
+            app:enterAnim="@anim/slide_left_anim" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
-        android:name="com.example.books.ui.description.DescriptionFragment"
-        android:label="fragment_description"
-        tools:layout="@layout/fragment_description" />
+        android:name="com.example.books.ui.fragments.description.DescriptionFragment"
+        android:label="Description"
+        tools:layout="@layout/fragment_description" >
+        <argument
+            android:name="books_description"
+            app:argType="com.example.books.ui.models.BooksModel" />
+    </fragment>
 </navigation>

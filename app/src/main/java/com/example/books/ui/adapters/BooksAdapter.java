@@ -1,20 +1,14 @@
-package com.example.books.adapters;
+package com.example.books.ui.adapters;
 
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.books.R;
-import com.example.books.databinding.FragmentBooksBinding;
 import com.example.books.databinding.ItemBooksListBinding;
-import com.example.books.interfaces.OnItemClick;
-import com.example.books.models.BooksModel;
+import com.example.books.ui.interfaces.OnItemClick;
+import com.example.books.ui.models.BooksModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +40,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
     }
 
     public void addList(List<BooksModel> listf) {
-        list.clear();
-        list.addAll(listf);
+        list = listf;
         notifyDataSetChanged();
     }
 
@@ -58,7 +51,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         }
 
         public void bind(BooksModel booksModel) {
-            itemView.setOnClickListener(v -> onItemClick.onClick(booksModel));
+            itemView.setOnClickListener(v -> onItemClick.onClick(booksModel, itemView));
             binding.txtTitle.setText(booksModel.getTitle());
             binding.imageView.setImageResource(booksModel.getImage());
         }

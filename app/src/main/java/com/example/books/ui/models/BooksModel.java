@@ -1,4 +1,4 @@
-package com.example.books.models;
+package com.example.books.ui.models;
 
 import java.io.Serializable;
 

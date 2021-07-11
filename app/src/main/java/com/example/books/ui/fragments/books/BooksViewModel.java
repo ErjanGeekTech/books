@@ -1,11 +1,10 @@
-package com.example.books.ui.books;
+package com.example.books.ui.fragments.books;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.books.R;
-import com.example.books.models.BooksModel;
+import com.example.books.ui.models.BooksModel;
 
 import java.util.ArrayList;
 import java.util.List;
