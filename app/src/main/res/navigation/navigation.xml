@@ -30,8 +30,8 @@
     <fragment
         android:id="@+id/dialogFragment"
         android:name="com.example.books.ui.fragments.dialog.DialogFragment"
-        android:label="fragment_dailog"
-        tools:layout="@layout/fragment_dailog" >
+        android:label="Dialog"
+        tools:layout="@layout/fragment_dailog">
         <argument
             android:name="dialog_image_books"
             app:argType="integer" />
