@@ -14,6 +14,9 @@
             android:id="@+id/action_booksFragment_to_descriptionFragment"
             app:destination="@id/descriptionFragment"
             app:enterAnim="@anim/slide_left_anim" />
+        <action
+            android:id="@+id/action_booksFragment_to_dialogFragment"
+            app:destination="@id/dialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
@@ -23,5 +26,14 @@
         <argument
             android:name="books_description"
             app:argType="com.example.books.ui.models.BooksModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/dialogFragment"
+        android:name="com.example.books.ui.fragments.dialog.DialogFragment"
+        android:label="fragment_dailog"
+        tools:layout="@layout/fragment_dailog" >
+        <argument
+            android:name="dialog_image_books"
+            app:argType="integer" />
     </fragment>
 </navigation>

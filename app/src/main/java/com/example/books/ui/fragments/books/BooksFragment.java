@@ -2,17 +2,15 @@ package com.example.books.ui.fragments.books;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.books.R;
 import com.example.books.base.BaseFragment;
 import com.example.books.ui.adapters.BooksAdapter;
 import com.example.books.databinding.FragmentBooksBinding;
@@ -38,7 +36,6 @@ public class BooksFragment extends BaseFragment<FragmentBooksBinding, BooksViewM
         setupRecycler();
         setupObserve();
         setupListener();
-        onClick();
     }
 
     @Override
@@ -60,17 +57,28 @@ public class BooksFragment extends BaseFragment<FragmentBooksBinding, BooksViewM
 
 
     private void setupListener() {
-        binding.bntFill.setOnClickListener(v -> {
-            binding.bntFill.setVisibility(View.GONE);
-            viewModel.get();
+        setupClickBtnFill();
+        setupClickBooks();
+    }
+
+    private void setupClickBooks() {
+        adapter.setOnItemClick(new OnItemClick() {
+            @Override
+            public void onClick(BooksModel model, View v) {
+                Navigation.findNavController(v).navigate(BooksFragmentDirections.actionBooksFragmentToDescriptionFragment(model).setBooksDescription(model));
+            }
+
+            @Override
+            public void onLongClick(int image, View v) {
+                Navigation.findNavController(v).navigate(BooksFragmentDirections.actionBooksFragmentToDialogFragment(image).setDialogImageBooks(image));
+            }
         });
     }
 
-
-
-    public void onClick() {
-        adapter.setOnItemClick((model, v) -> {
-            Navigation.findNavController(v).navigate(BooksFragmentDirections.actionBooksFragmentToDescriptionFragment(model).setBooksDescription(model));
+    private void setupClickBtnFill() {
+        binding.bntFill.setOnClickListener(v -> {
+            binding.bntFill.setVisibility(View.GONE);
+            viewModel.get();
         });
     }
 }

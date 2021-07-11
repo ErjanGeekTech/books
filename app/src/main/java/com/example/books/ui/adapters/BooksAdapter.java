@@ -52,6 +52,10 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
         public void bind(BooksModel booksModel) {
             itemView.setOnClickListener(v -> onItemClick.onClick(booksModel, itemView));
+            binding.imageView.setOnLongClickListener(v -> {
+                onItemClick.onLongClick(booksModel.getImage(), v);
+                return false;
+            });
             binding.txtTitle.setText(booksModel.getTitle());
             binding.imageView.setImageResource(booksModel.getImage());
         }
