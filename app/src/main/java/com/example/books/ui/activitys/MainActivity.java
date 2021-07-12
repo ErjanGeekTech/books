@@ -1,4 +1,4 @@
-package com.example.books;
+package com.example.books.ui.activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -8,6 +8,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 
+import com.example.books.R;
 import com.example.books.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

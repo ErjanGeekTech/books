@@ -7,6 +7,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,18 +32,17 @@ public class BooksFragment extends BaseFragment<FragmentBooksBinding, BooksViewM
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setupRecycler();
-        setupObserve();
-        setupListener();
-    }
-
-    @Override
     protected void initialize() {
         viewModel = new ViewModelProvider(requireActivity()).get(BooksViewModel.class);
     }
 
+    @Override
+    protected void setupListener() {
+        setupClickBtnFill();
+        setupClickBooks();
+    }
+
+    @Override
     protected void setupObserve() {
         viewModel.getAll.observe(getViewLifecycleOwner(), booksModels -> {
             binding.bntFill.setVisibility(View.GONE);
@@ -50,16 +50,16 @@ public class BooksFragment extends BaseFragment<FragmentBooksBinding, BooksViewM
         });
     }
 
+    @Override
+    protected void setupViews() {
+        setupRecycler();
+    }
+
     private void setupRecycler() {
         binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rv.setAdapter(adapter);
     }
 
-
-    private void setupListener() {
-        setupClickBtnFill();
-        setupClickBooks();
-    }
 
     private void setupClickBooks() {
         adapter.setOnItemClick(new OnItemClick() {
@@ -70,7 +70,8 @@ public class BooksFragment extends BaseFragment<FragmentBooksBinding, BooksViewM
 
             @Override
             public void onLongClick(int image, View v) {
-                Navigation.findNavController(v).navigate(BooksFragmentDirections.actionBooksFragmentToDialogFragment(image).setDialogImageBooks(image));
+                Log.e("tag4", String.valueOf(image));
+                Navigation.findNavController(v).navigate(BooksFragmentDirections.actionBooksFragmentToDIalogFragment(image).setGetImageDlalog(image));
             }
         });
     }

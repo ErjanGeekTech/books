@@ -24,13 +24,6 @@ public class DescriptionFragment extends BaseFragment<FragmentDescriptionBinding
         return binding.getRoot();
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setupDescription();
-
-    }
-
     private void setupDescription() {
         BooksModel model = DescriptionFragmentArgs.fromBundle(getArguments()).getBooksDescription();
         binding.txtTitle.setText(model.getTitle());
@@ -42,7 +35,19 @@ public class DescriptionFragment extends BaseFragment<FragmentDescriptionBinding
         viewModel = new ViewModelProvider(requireActivity()).get(DescriptionViewModel.class);
     }
 
+    @Override
+    protected void setupListener() {
+        setupDescription();
+    }
 
+    @Override
+    protected void setupObserve() {
+
+    }
+
+    @Override
+    protected void setupViews() {
+    }
 
 
 }

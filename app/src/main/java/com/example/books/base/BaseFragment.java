@@ -22,9 +22,19 @@ public abstract class BaseFragment<Binding, ViewModel> extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initialize();
+        setupListener();
+        setupObserve();
+        setupViews();
     }
 
+
     protected abstract void initialize();
+    protected abstract void setupListener();
+
+    protected abstract void setupObserve();
+    protected abstract void setupViews();
+
+
 
 
 

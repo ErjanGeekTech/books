@@ -15,8 +15,8 @@
             app:destination="@id/descriptionFragment"
             app:enterAnim="@anim/slide_left_anim" />
         <action
-            android:id="@+id/action_booksFragment_to_dialogFragment"
-            app:destination="@id/dialogFragment" />
+            android:id="@+id/action_booksFragment_to_DIalogFragment"
+            app:destination="@id/DIalogFragment" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
@@ -27,13 +27,15 @@
             android:name="books_description"
             app:argType="com.example.books.ui.models.BooksModel" />
     </fragment>
-    <fragment
-        android:id="@+id/dialogFragment"
-        android:name="com.example.books.ui.fragments.dialog.DialogFragment"
-        android:label="Dialog"
-        tools:layout="@layout/fragment_dailog">
+
+    <dialog
+        android:id="@+id/DIalogFragment"
+        android:name="com.example.books.ui.fragments.dialog.DIalogFragment"
+        android:label="fragment_dlalog"
+        tools:layout="@layout/fragment_dlalog"
+        android:defaultValue="@null">
         <argument
-            android:name="dialog_image_books"
+            android:name="get_image_dlalog"
             app:argType="integer" />
-    </fragment>
+    </dialog>
 </navigation>
