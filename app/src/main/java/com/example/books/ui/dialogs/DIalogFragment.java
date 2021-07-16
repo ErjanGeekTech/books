@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.DialogFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +17,7 @@ import android.view.ViewGroup;
 import com.example.books.databinding.FragmentDlalogBinding;
 
 
-public class DIalogFragment extends AppCompatDialogFragment {
+public class DIalogFragment extends DialogFragment {
 
     FragmentDlalogBinding binding;
 
@@ -36,9 +37,9 @@ public class DIalogFragment extends AppCompatDialogFragment {
     }
 
     private void setupImage() {
-        int image = DIalogFragmentArgs.fromBundle(getArguments()).getGetImageDlalog();
-        Log.e("tag", String.valueOf(image));
-        binding.imageBooksDialog.setImageResource(image);
+//        int image = DIalogFragmentArgs.fromBundle(getArguments()).getGetImageDlalog();
+//        Log.e("tag", String.valueOf(image));
+//        binding.imageBooksDialog.setImageResource(image);
     }
 
 }

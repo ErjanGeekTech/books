@@ -2,9 +2,9 @@ package com.example.books.ui.interfaces;
 
 import android.view.View;
 
-import com.example.books.ui.models.BooksModel;
+import com.example.books.models.RickAndMortyCharacter;
 
 public interface OnItemClick {
-    void onClick(BooksModel model, View v);
+    void onClick(int id, View v);
     void onLongClick(int image, View v);
 }

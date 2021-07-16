@@ -4,13 +4,20 @@ import android.os.Bundle;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.books.base.BaseFragment;
+import com.example.books.data.network.retrofit.RetrofitClient;
 import com.example.books.databinding.FragmentDescriptionBinding;
-import com.example.books.ui.models.BooksModel;
+import com.example.books.models.RickAndMortyCharacter;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class DescriptionFragment extends BaseFragment<FragmentDescriptionBinding, DescriptionViewModel> {
@@ -24,10 +31,30 @@ public class DescriptionFragment extends BaseFragment<FragmentDescriptionBinding
         return binding.getRoot();
     }
 
-    private void setupDescription() {
-        BooksModel model = DescriptionFragmentArgs.fromBundle(getArguments()).getBooksDescription();
-        binding.txtTitle.setText(model.getTitle());
-        binding.txtDescription.setText(model.getDescription());
+    private void setupId() {
+        int id = DescriptionFragmentArgs.fromBundle(getArguments()).getGetItemId();
+        Log.e("tag", String.valueOf(id));
+        setupService(id);
+    }
+
+    private void setupService(int id) {
+        Call<RickAndMortyCharacter> call = RetrofitClient.provideCharacterApiService().fetchCharacter(id);
+        call.enqueue(new Callback<RickAndMortyCharacter>() {
+            @Override
+            public void onResponse(Call<RickAndMortyCharacter> call, Response<RickAndMortyCharacter> response) {
+                RickAndMortyCharacter character = response.body();
+                Glide
+                        .with(binding.imageDescription)
+                        .load(character.image)
+                        .into(binding.imageDescription);
+                binding.textNameDescription.setText(character.getName());
+            }
+
+            @Override
+            public void onFailure(Call<RickAndMortyCharacter> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -37,17 +64,10 @@ public class DescriptionFragment extends BaseFragment<FragmentDescriptionBinding
 
     @Override
     protected void setupListener() {
-        setupDescription();
+        setupId();
     }
 
-    @Override
-    protected void setupObserve() {
 
-    }
-
-    @Override
-    protected void setupViews() {
-    }
 
 
 }

@@ -3,29 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/booksFragment">
+    app:startDestination="@id/characterFragment">
 
-    <fragment
-        android:id="@+id/booksFragment"
-        android:name="com.example.books.ui.fragments.books.BooksFragment"
-        android:label="Books"
-        tools:layout="@layout/fragment_books" >
-        <action
-            android:id="@+id/action_booksFragment_to_descriptionFragment"
-            app:destination="@id/descriptionFragment"
-            app:enterAnim="@anim/slide_left_anim" />
-        <action
-            android:id="@+id/action_booksFragment_to_DIalogFragment"
-            app:destination="@id/DIalogFragment" />
-    </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
         android:name="com.example.books.ui.fragments.description.DescriptionFragment"
         android:label="Description"
         tools:layout="@layout/fragment_description" >
         <argument
-            android:name="books_description"
-            app:argType="com.example.books.ui.models.BooksModel" />
+            android:name="get_item_id"
+            app:argType="integer" />
     </fragment>
 
     <dialog
@@ -33,9 +20,14 @@
         android:name="com.example.books.ui.dialogs.DIalogFragment"
         android:label="fragment_dlalog"
         tools:layout="@layout/fragment_dlalog"
-        android:defaultValue="@null">
-        <argument
-            android:name="get_image_dlalog"
-            app:argType="integer" />
-    </dialog>
+        android:defaultValue="@null"/>
+    <fragment
+        android:id="@+id/characterFragment"
+        android:name="com.example.books.ui.fragments.books.CharacterFragment"
+        android:label="Character"
+        tools:layout="@layout/fragment_character" >
+        <action
+            android:id="@+id/action_characterFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
+    </fragment>
 </navigation>

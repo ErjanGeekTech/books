@@ -23,19 +23,30 @@ public abstract class BaseFragment<Binding, ViewModel> extends Fragment {
 
         initialize();
         setupListener();
+        setupRequests();
         setupObserve();
         setupViews();
     }
 
+    protected void setupRequests() {
 
-    protected abstract void initialize();
-    protected abstract void setupListener();
+    }
 
-    protected abstract void setupObserve();
-    protected abstract void setupViews();
+    protected void initialize() {
 
+    }
 
+    protected void setupListener() {
 
+    }
+
+    protected void setupObserve() {
+
+    }
+
+    protected void setupViews() {
+
+    }
 
 
 }
