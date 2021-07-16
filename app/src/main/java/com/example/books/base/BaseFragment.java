@@ -44,7 +44,7 @@ public abstract class BaseFragment<Binding, ViewModel> extends Fragment {
 
     }
 
-    protected void setupViews() {
+    protected  void setupViews() {
 
     }
 

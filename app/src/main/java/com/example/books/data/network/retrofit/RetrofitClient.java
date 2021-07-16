@@ -7,12 +7,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    static Retrofit retrofitClient = new Retrofit.Builder()
+     Retrofit retrofitClient = new Retrofit.Builder()
             .baseUrl("https://rickandmortyapi.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    public static CharactersApiService provideCharacterApiService(){
+    public  CharactersApiService provideCharacterApiService(){
         return retrofitClient.create(CharactersApiService.class);
     }
 }
