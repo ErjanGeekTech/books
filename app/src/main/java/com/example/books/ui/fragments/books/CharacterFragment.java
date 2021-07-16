@@ -46,6 +46,7 @@ public class CharacterFragment extends BaseFragment<FragmentCharacterBinding, Ch
     @Override
     protected void setupObserve() {
         viewModel.data.observe(getViewLifecycleOwner(), rickAndMortyCharacterRickAndMortyResponse -> {
+            binding.progressCircular.setVisibility(View.INVISIBLE);
             adapter.submitList(rickAndMortyCharacterRickAndMortyResponse.getResults());
         });
     }

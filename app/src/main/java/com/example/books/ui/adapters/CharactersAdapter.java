@@ -63,7 +63,6 @@ public class CharactersAdapter extends ListAdapter<RickAndMortyCharacter, Charac
                     .with(binding.imageItemCharacter)
                     .load(item.image)
                     .into(binding.imageItemCharacter);
-
             binding.textItemCharacter.setText(item.name);
 
             itemView.setOnClickListener(v -> itemClick.onClick(item.getId(), v));
