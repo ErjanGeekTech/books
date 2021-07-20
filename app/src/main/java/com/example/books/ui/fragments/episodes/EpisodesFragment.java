@@ -30,6 +30,8 @@ public class EpisodesFragment extends BaseFragment<FragmentEpisodesBinding, Epis
 
     private boolean loading = true;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
+    boolean progressBarOne = true;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +48,9 @@ public class EpisodesFragment extends BaseFragment<FragmentEpisodesBinding, Epis
             @Override
             public void onChanged(RickAndMortyResponse<RickAndMortyEpisodes> rickAndMortyEpisodesRickAndMortyResponse) {
                 binding.progressCircular.setVisibility(View.GONE);
-                adapter.addList(rickAndMortyEpisodesRickAndMortyResponse.getResults());
+                if (rickAndMortyEpisodesRickAndMortyResponse != null) {
+                    adapter.addList(rickAndMortyEpisodesRickAndMortyResponse.getResults());
+                }
             }
         });
     }
@@ -76,7 +80,19 @@ public class EpisodesFragment extends BaseFragment<FragmentEpisodesBinding, Epis
                             loading = false;
                             viewModel.episodesPage++;
                             Log.e("anime", "aded");
-                            viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), rickAndMortyCharacterRickAndMortyResponse -> adapter.addList(rickAndMortyCharacterRickAndMortyResponse.getResults()));
+                            viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), rickAndMortyCharacterRickAndMortyResponse -> {
+                                if (rickAndMortyCharacterRickAndMortyResponse != null) {
+                                    binding.progressBar.setVisibility(View.INVISIBLE);
+                                    adapter.addList(rickAndMortyCharacterRickAndMortyResponse.getResults());
+                                } else {
+                                    progressBarOne = false;
+                                    binding.rv.setPadding(0, 0, 0, 0);
+                                    binding.progressBar.setVisibility(View.GONE);
+                                }
+                            });
+                            if (progressBarOne) {
+                                binding.progressBar.setVisibility(View.VISIBLE);
+                            }
                             loading = true;
                         }
                     }

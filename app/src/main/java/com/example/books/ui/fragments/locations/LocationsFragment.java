@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.books.R;
 import com.example.books.base.BaseFragment;
+import com.example.books.data.repositories.RickAndMortyRepository;
 import com.example.books.databinding.FragmentLocationsBinding;
 import com.example.books.models.RickAndMortyLocation;
 import com.example.books.models.RickAndMortyResponse;
@@ -28,7 +29,9 @@ public class LocationsFragment extends BaseFragment<FragmentLocationsBinding, Lo
     LocationsAdapter adapter = new LocationsAdapter();
     LinearLayoutManager linearLayoutManager;
     private boolean loading = true;
+    private boolean progressBarOne = true;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
+    RickAndMortyRepository repository = new RickAndMortyRepository();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,8 +66,20 @@ public class LocationsFragment extends BaseFragment<FragmentLocationsBinding, Lo
                         if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                             loading = false;
                             viewModel.locationPage++;
-                            Log.e("anime", "aded");
-                            viewModel.fetchLocations().observe(getViewLifecycleOwner(), rickAndMortyCharacterRickAndMortyResponse -> adapter.addList(rickAndMortyCharacterRickAndMortyResponse.getResults()));
+
+                            viewModel.fetchLocations().observe(getViewLifecycleOwner(), rickAndMortyCharacterRickAndMortyResponse -> {
+                                if (rickAndMortyCharacterRickAndMortyResponse != null) {
+                                    binding.progressBar.setVisibility(View.INVISIBLE);
+                                    adapter.addList(rickAndMortyCharacterRickAndMortyResponse.getResults());
+                                }else {
+                                    progressBarOne = false;
+                                    binding.rv.setPadding(0, 0, 0, 0);
+                                    binding.progressBar.setVisibility(View.GONE);
+                                }
+                            });
+                            if (progressBarOne) {
+                                binding.progressBar.setVisibility(View.VISIBLE);
+                            }
                             loading = true;
                         }
                     }
@@ -80,7 +95,9 @@ public class LocationsFragment extends BaseFragment<FragmentLocationsBinding, Lo
             @Override
             public void onChanged(RickAndMortyResponse<RickAndMortyLocation> rickAndMortyLocationRickAndMortyResponse) {
                 binding.progressCircular.setVisibility(View.GONE);
-                adapter.addList(rickAndMortyLocationRickAndMortyResponse.getResults());
+                if(rickAndMortyLocationRickAndMortyResponse != null) {
+                    adapter.addList(rickAndMortyLocationRickAndMortyResponse.getResults());
+                }
             }
         });
     }

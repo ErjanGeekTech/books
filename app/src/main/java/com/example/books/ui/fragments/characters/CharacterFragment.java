@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.example.books.base.BaseFragment;
 import com.example.books.databinding.FragmentCharacterBinding;
@@ -23,13 +24,18 @@ import com.example.books.ui.interfaces.OnItemClick;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class CharacterFragment extends BaseFragment<FragmentCharacterBinding, CharacterViewModel> {
 
     private CharactersAdapter adapter = new CharactersAdapter();
     private boolean loading = true;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
-    LinearLayoutManager linearLayoutManager;
+    private LinearLayoutManager linearLayoutManager;
+    private boolean progressbarOne = true;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +51,9 @@ public class CharacterFragment extends BaseFragment<FragmentCharacterBinding, Ch
             @Override
             public void onChanged(RickAndMortyResponse<RickAndMortyCharacter> rickAndMortyCharacterRickAndMortyResponse) {
                 binding.progressCircular.setVisibility(View.INVISIBLE);
-                adapter.addList(rickAndMortyCharacterRickAndMortyResponse.getResults());
+                if (rickAndMortyCharacterRickAndMortyResponse != null) {
+                    adapter.addList(rickAndMortyCharacterRickAndMortyResponse.getResults());
+                }
             }
         });
     }
@@ -59,7 +67,6 @@ public class CharacterFragment extends BaseFragment<FragmentCharacterBinding, Ch
     protected void setupListener() {
         setupClickBooks();
     }
-
 
 
     @Override
@@ -80,13 +87,23 @@ public class CharacterFragment extends BaseFragment<FragmentCharacterBinding, Ch
                     visibleItemCount = linearLayoutManager.getChildCount();
                     totalItemCount = linearLayoutManager.getItemCount();
                     pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
-
                     if (loading) {
                         if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                             loading = false;
                             viewModel.chartersPage++;
-                            Log.e("anime", "aded");
-                            viewModel.fetchCharacters().observe(getViewLifecycleOwner(), rickAndMortyCharacterRickAndMortyResponse -> adapter.addList(rickAndMortyCharacterRickAndMortyResponse.getResults()));
+                            viewModel.fetchCharacters().observe(getViewLifecycleOwner(), rickAndMortyCharacterRickAndMortyResponse -> {
+                                if (rickAndMortyCharacterRickAndMortyResponse != null) {
+                                    binding.progressBar.setVisibility(View.INVISIBLE);
+                                    adapter.addList(rickAndMortyCharacterRickAndMortyResponse.getResults());
+                                } else {
+                                    progressbarOne = false;
+                                    binding.rv.setPadding(0, 0, 0, 0);
+                                    binding.progressBar.setVisibility(View.GONE);
+                                }
+                            });
+                            if (progressbarOne) {
+                                binding.progressBar.setVisibility(View.VISIBLE);
+                            }
                             loading = true;
                         }
                     }
