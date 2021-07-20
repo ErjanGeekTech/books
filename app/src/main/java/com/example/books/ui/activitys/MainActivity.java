@@ -31,10 +31,13 @@ public class MainActivity extends AppCompatActivity {
          navController = navHostFragment.getNavController();
 
         appBarConfiguration = new AppBarConfiguration.Builder(
-               navController.getGraph()
+                R.id.characterFragment,
+                R.id.locationsFragment,
+                R.id.episodesFragment
         ).build();
+                NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        NavigationUI.setupActionBarWithNavController(this, navController);
+        NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
     }
 
     @Override

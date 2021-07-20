@@ -16,17 +16,21 @@ import com.example.books.databinding.ItemCharacterBinding;
 import com.example.books.models.RickAndMortyCharacter;
 import com.example.books.ui.interfaces.OnItemClick;
 
-public class CharactersAdapter extends ListAdapter<RickAndMortyCharacter, CharactersAdapter.CharactersViewHolder> {
+import java.util.ArrayList;
+
+public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.CharactersViewHolder> {
 
    private ItemCharacterBinding binding;
    public OnItemClick itemClick;
+   private ArrayList <RickAndMortyCharacter> list = new ArrayList<>();
 
     public void setItemClick(OnItemClick itemClick) {
         this.itemClick = itemClick;
     }
 
-    public CharactersAdapter(DiffUtil.ItemCallback<RickAndMortyCharacter> diffCallback) {
-        super(diffCallback);
+    public void addList (ArrayList <RickAndMortyCharacter> getList){
+        list.addAll(getList);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -50,7 +54,12 @@ public class CharactersAdapter extends ListAdapter<RickAndMortyCharacter, Charac
 
     @Override
     public void onBindViewHolder( CharactersAdapter.CharactersViewHolder holder, int position) {
-        holder.onBind(getItem(position));
+        holder.onBind(list.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
     }
 
     public class CharactersViewHolder extends RecyclerView.ViewHolder {
