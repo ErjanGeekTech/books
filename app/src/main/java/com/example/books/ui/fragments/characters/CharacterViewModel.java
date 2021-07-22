@@ -7,6 +7,8 @@ import com.example.books.data.repositories.RickAndMortyRepository;
 import com.example.books.models.RickAndMortyCharacter;
 import com.example.books.models.RickAndMortyResponse;
 
+import java.util.ArrayList;
+
 public class CharacterViewModel extends ViewModel {
 
     RickAndMortyRepository repository = new RickAndMortyRepository();
@@ -15,5 +17,9 @@ public class CharacterViewModel extends ViewModel {
 
     public  MutableLiveData<RickAndMortyResponse<RickAndMortyCharacter>> fetchCharacters(){
         return repository.fetchCharacters(chartersPage);
+    }
+
+    public ArrayList<RickAndMortyCharacter> getCharacters(){
+        return repository.getCharacters();
     }
 }

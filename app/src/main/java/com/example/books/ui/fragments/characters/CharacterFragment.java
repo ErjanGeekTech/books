@@ -1,5 +1,8 @@
 package com.example.books.ui.fragments.characters;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -47,15 +50,28 @@ public class CharacterFragment extends BaseFragment<FragmentCharacterBinding, Ch
 
     @Override
     protected void setupRequests() {
-        viewModel.fetchCharacters().observe(getViewLifecycleOwner(), new Observer<RickAndMortyResponse<RickAndMortyCharacter>>() {
-            @Override
-            public void onChanged(RickAndMortyResponse<RickAndMortyCharacter> rickAndMortyCharacterRickAndMortyResponse) {
+        fetchCharacters();
+    }
+
+    private void fetchCharacters() {
+        if (isNetworkAvailable()){
+            viewModel.fetchCharacters().observe(getViewLifecycleOwner(), rickAndMortyCharacterRickAndMortyResponse -> {
                 binding.progressCircular.setVisibility(View.INVISIBLE);
+                Log.e("tag", "help");
                 if (rickAndMortyCharacterRickAndMortyResponse != null) {
                     adapter.addList(rickAndMortyCharacterRickAndMortyResponse.getResults());
                 }
-            }
-        });
+            });
+        }else {
+            binding.progressCircular.setVisibility(View.INVISIBLE);
+            adapter.addList(viewModel.getCharacters());
+        }
+    }
+    public boolean isNetworkAvailable(){
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
+        return  netInfo != null && netInfo.isConnected();
     }
 
     @Override

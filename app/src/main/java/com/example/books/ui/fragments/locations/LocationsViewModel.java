@@ -7,6 +7,8 @@ import com.example.books.data.repositories.RickAndMortyRepository;
 import com.example.books.models.RickAndMortyLocation;
 import com.example.books.models.RickAndMortyResponse;
 
+import java.util.ArrayList;
+
 public class LocationsViewModel extends ViewModel {
 
     RickAndMortyRepository repository = new RickAndMortyRepository();
@@ -17,4 +19,7 @@ public class LocationsViewModel extends ViewModel {
         return repository.fetchLocations(locationPage);
     }
 
+    public ArrayList<RickAndMortyLocation> getLocations(){
+        return repository.getLocations();
+    }
 }

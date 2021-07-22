@@ -33,11 +33,6 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
         notifyDataSetChanged();
     }
 
-    public  void  updateList(ArrayList<RickAndMortyCharacter> getList){
-        list.addAll(getList);
-        notifyDataSetChanged();
-    }
-
     @Override
     public CharactersViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         binding = ItemCharacterBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);

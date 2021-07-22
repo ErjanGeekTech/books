@@ -1,12 +1,15 @@
 package com.example.books.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
-
+@Entity
 public class RickAndMortyLocation implements Serializable {
-
+    @PrimaryKey
     @SerializedName("id")
     public Integer id;
 
@@ -18,8 +21,7 @@ public class RickAndMortyLocation implements Serializable {
     @SerializedName("dimension")
     public String dimension;
 
-    @SerializedName("residents")
-    public List<String> residents = null;
+
 
     @SerializedName("url")
     public String url;
@@ -59,13 +61,6 @@ public class RickAndMortyLocation implements Serializable {
         this.dimension = dimension;
     }
 
-    public List<String> getResidents() {
-        return residents;
-    }
-
-    public void setResidents(List<String> residents) {
-        this.residents = residents;
-    }
 
     public String getUrl() {
         return url;

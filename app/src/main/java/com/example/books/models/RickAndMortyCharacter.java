@@ -1,11 +1,14 @@
 package com.example.books.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-
+@Entity
 public class RickAndMortyCharacter implements Serializable {
-
+    @PrimaryKey
     @SerializedName("id")
     public int id;
 

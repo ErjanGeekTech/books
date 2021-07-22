@@ -15,13 +15,14 @@ import com.example.books.models.RickAndMortyLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.LocationViewHolder> {
 
     ArrayList<RickAndMortyLocation> list = new ArrayList<>();
     ItemLocationBinding binding;
 
-    public void addList(ArrayList<RickAndMortyLocation> getList){
+    public void addList(List<RickAndMortyLocation> getList){
         list.addAll(getList);
         notifyDataSetChanged();
     }

@@ -71,4 +71,10 @@ dependencies {
     def paging_version = "3.0.0"
 
     implementation "androidx.paging:paging-runtime:$paging_version"
+
+    //Room
+    def room_version = "2.3.0"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 }

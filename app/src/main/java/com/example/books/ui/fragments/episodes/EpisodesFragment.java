@@ -1,5 +1,8 @@
 package com.example.books.ui.fragments.episodes;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.books.App;
 import com.example.books.R;
 import com.example.books.base.BaseFragment;
 import com.example.books.databinding.FragmentEpisodesBinding;
@@ -44,16 +48,35 @@ public class EpisodesFragment extends BaseFragment<FragmentEpisodesBinding, Epis
     @Override
     protected void setupRequests() {
         super.setupRequests();
-        viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), new Observer<RickAndMortyResponse<RickAndMortyEpisodes>>() {
-            @Override
-            public void onChanged(RickAndMortyResponse<RickAndMortyEpisodes> rickAndMortyEpisodesRickAndMortyResponse) {
-                binding.progressCircular.setVisibility(View.GONE);
-                if (rickAndMortyEpisodesRickAndMortyResponse != null) {
-                    adapter.addList(rickAndMortyEpisodesRickAndMortyResponse.getResults());
-                }
-            }
-        });
+
+        fetchEpisodes();
     }
+
+    private void fetchEpisodes() {
+        if (isNetworkAvailable()){
+            viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), new Observer<RickAndMortyResponse<RickAndMortyEpisodes>>() {
+                @Override
+                public void onChanged(RickAndMortyResponse<RickAndMortyEpisodes> rickAndMortyEpisodesRickAndMortyResponse) {
+                    binding.progressCircular.setVisibility(View.GONE);
+                    if (rickAndMortyEpisodesRickAndMortyResponse != null) {
+                        adapter.addList(rickAndMortyEpisodesRickAndMortyResponse.getResults());
+                    }
+                }
+            });
+        }else {
+            binding.progressCircular.setVisibility(View.GONE);
+            adapter.addList(App.characterDao.getAllEpisode());
+        }
+    }
+
+
+    public boolean isNetworkAvailable(){
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
+        return  netInfo != null && netInfo.isConnected();
+    }
+
 
     @Override
     protected void setupViews() {
@@ -79,7 +102,6 @@ public class EpisodesFragment extends BaseFragment<FragmentEpisodesBinding, Epis
                         if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                             loading = false;
                             viewModel.episodesPage++;
-                            Log.e("anime", "aded");
                             viewModel.fetchEpisodes().observe(getViewLifecycleOwner(), rickAndMortyCharacterRickAndMortyResponse -> {
                                 if (rickAndMortyCharacterRickAndMortyResponse != null) {
                                     binding.progressBar.setVisibility(View.INVISIBLE);

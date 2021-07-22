@@ -1,5 +1,8 @@
 package com.example.books.ui.fragments.locations;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.books.App;
 import com.example.books.R;
 import com.example.books.base.BaseFragment;
 import com.example.books.data.repositories.RickAndMortyRepository;
@@ -91,15 +95,28 @@ public class LocationsFragment extends BaseFragment<FragmentLocationsBinding, Lo
     @Override
     protected void setupRequests() {
         super.setupRequests();
-        viewModel.fetchLocations().observe(getViewLifecycleOwner(), new Observer<RickAndMortyResponse<RickAndMortyLocation>>() {
-            @Override
-            public void onChanged(RickAndMortyResponse<RickAndMortyLocation> rickAndMortyLocationRickAndMortyResponse) {
+        fetchLocations();
+    }
+
+    private void fetchLocations() {
+        if (isNetworkAvailable()){
+            viewModel.fetchLocations().observe(getViewLifecycleOwner(), rickAndMortyLocationRickAndMortyResponse -> {
                 binding.progressCircular.setVisibility(View.GONE);
                 if(rickAndMortyLocationRickAndMortyResponse != null) {
                     adapter.addList(rickAndMortyLocationRickAndMortyResponse.getResults());
                 }
-            }
-        });
+            });
+        }else {
+            binding.progressCircular.setVisibility(View.GONE);
+            adapter.addList(App.characterDao.getAllLocation());
+        }
+    }
+
+    public boolean isNetworkAvailable(){
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
+        return  netInfo != null && netInfo.isConnected();
     }
 
     @Override
