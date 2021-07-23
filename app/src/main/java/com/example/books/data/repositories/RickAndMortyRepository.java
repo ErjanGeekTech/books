@@ -49,7 +49,7 @@ public class RickAndMortyRepository {
             @Override
             public void onResponse(Call<RickAndMortyResponse<RickAndMortyLocation>> call, Response<RickAndMortyResponse<RickAndMortyLocation>> response) {
                 if (response.body() != null) {
-                    App.characterDao.insertAllLocation(response.body().getResults());
+                    App.locationDao.insertAllLocation(response.body().getResults());
                 }
                 location.setValue(response.body());
 
@@ -65,7 +65,7 @@ public class RickAndMortyRepository {
 
     public ArrayList<RickAndMortyLocation> getLocations(){
         ArrayList list = new ArrayList();
-        list.addAll(App.characterDao.getAllLocation());
+        list.addAll(App.locationDao.getAllLocation());
         return list;
 
     }
@@ -76,7 +76,7 @@ public class RickAndMortyRepository {
             @Override
             public void onResponse(Call<RickAndMortyResponse<RickAndMortyEpisodes>> call, Response<RickAndMortyResponse<RickAndMortyEpisodes>> response) {
                 if (response.body() != null){
-                    App.characterDao.insertAllEpisodes(response.body().getResults());
+                    App.episodeDao.insertAllEpisodes(response.body().getResults());
                 }
                 episodes.setValue(response.body());
             }
@@ -91,7 +91,7 @@ public class RickAndMortyRepository {
 
     public ArrayList<RickAndMortyEpisodes>getEpisodes(){
         ArrayList list = new ArrayList();
-        list.addAll(App.characterDao.getAllEpisode());
+        list.addAll(App.episodeDao.getAllEpisode());
         return list;
 
     }

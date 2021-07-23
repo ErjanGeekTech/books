@@ -5,24 +5,18 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.books.models.RickAndMortyCharacter;
 import com.example.books.models.RickAndMortyEpisodes;
-import com.example.books.models.RickAndMortyLocation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Dao
-public interface CharacterDao {
+public interface EpisodeDao {
 
-    @Query("SELECT * FROM rickandmortycharacter")
-    List<RickAndMortyCharacter> getAll();
+    @Query("SELECT * FROM rickandmortyepisodes")
+    List<RickAndMortyEpisodes> getAllEpisode();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(ArrayList<RickAndMortyCharacter> characters);
-
-
-
-
+    void insertAllEpisodes(ArrayList<RickAndMortyEpisodes> episodes);
 
 }

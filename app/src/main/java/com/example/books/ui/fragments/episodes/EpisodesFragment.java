@@ -65,7 +65,7 @@ public class EpisodesFragment extends BaseFragment<FragmentEpisodesBinding, Epis
             });
         }else {
             binding.progressCircular.setVisibility(View.GONE);
-            adapter.addList(App.characterDao.getAllEpisode());
+            adapter.addList(viewModel.getEpisodes());
         }
     }
 

@@ -108,7 +108,7 @@ public class LocationsFragment extends BaseFragment<FragmentLocationsBinding, Lo
             });
         }else {
             binding.progressCircular.setVisibility(View.GONE);
-            adapter.addList(App.characterDao.getAllLocation());
+            adapter.addList(viewModel.getLocations());
         }
     }
 
