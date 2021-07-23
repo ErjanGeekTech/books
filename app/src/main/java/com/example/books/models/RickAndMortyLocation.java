@@ -2,7 +2,9 @@ package com.example.books.models;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
+import com.example.books.models.converters.ResidentsConverter;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -21,7 +23,9 @@ public class RickAndMortyLocation implements Serializable {
     @SerializedName("dimension")
     public String dimension;
 
-
+    @SerializedName("residents")
+    @TypeConverters({ResidentsConverter.class})
+    private List<String> residents;
 
     @SerializedName("url")
     public String url;
@@ -78,4 +82,11 @@ public class RickAndMortyLocation implements Serializable {
         this.created = created;
     }
 
+    public List<String> getResidents() {
+        return residents;
+    }
+
+    public void setResidents(List<String> residents) {
+        this.residents = residents;
+    }
 }

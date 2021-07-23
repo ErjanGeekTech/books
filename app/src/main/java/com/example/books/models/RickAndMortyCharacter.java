@@ -1,8 +1,12 @@
 package com.example.books.models;
 
+import android.webkit.WebStorage;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
+import com.example.books.models.converters.OriginConverter;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -20,6 +24,10 @@ public class RickAndMortyCharacter implements Serializable {
 
     @SerializedName("image")
     public String image;
+
+//    @SerializedName("origin")
+//    @TypeConverters(OriginConverter.class)
+//    private WebStorage.Origin origin;
 
     public int getId() {
         return id;
@@ -52,4 +60,12 @@ public class RickAndMortyCharacter implements Serializable {
     public void setImage(String image) {
         this.image = image;
     }
+
+//    public WebStorage.Origin getOrigin() {
+//        return origin;
+//    }
+
+//    public void setOrigin(WebStorage.Origin origin) {
+//        this.origin = origin;
+//    }
 }
