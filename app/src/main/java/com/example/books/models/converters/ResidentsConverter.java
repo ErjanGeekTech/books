@@ -13,12 +13,12 @@ public class ResidentsConverter {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @TypeConverter
-    public String fromResidents(List<String> residents) {
+    public String fromList(List<String> residents) {
         return residents.stream().collect(Collectors.joining(","));
     }
 
     @TypeConverter
-    public List<String> toResidents(String resident) {
+    public List<String> toList(String resident) {
         return Arrays.asList(resident.split(","));
     }
 

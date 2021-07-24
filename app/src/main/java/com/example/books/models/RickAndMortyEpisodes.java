@@ -2,7 +2,9 @@ package com.example.books.models;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
+import com.example.books.models.converters.ResidentsConverter;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -27,6 +29,10 @@ public class RickAndMortyEpisodes {
 
     @SerializedName("created")
     public String created;
+
+    @SerializedName("characters")
+    @TypeConverters(ResidentsConverter.class)
+    private List<String> characters;
 
     public Integer getId() {
         return id;
@@ -77,4 +83,11 @@ public class RickAndMortyEpisodes {
         this.created = created;
     }
 
+    public List<String> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(List<String> characters) {
+        this.characters = characters;
+    }
 }
