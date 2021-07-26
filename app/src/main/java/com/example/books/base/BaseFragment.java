@@ -2,15 +2,12 @@ package com.example.books.base;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
-import com.example.books.R;
+import org.jetbrains.annotations.NotNull;
+
 
 public abstract class BaseFragment<Binding, ViewModel> extends Fragment {
 
@@ -18,7 +15,7 @@ public abstract class BaseFragment<Binding, ViewModel> extends Fragment {
     protected ViewModel viewModel;
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NotNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         initialize();

@@ -6,28 +6,23 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.books.App;
-import com.example.books.R;
 import com.example.books.base.BaseFragment;
-import com.example.books.data.repositories.RickAndMortyRepository;
 import com.example.books.databinding.FragmentLocationsBinding;
-import com.example.books.models.RickAndMortyLocation;
-import com.example.books.models.RickAndMortyResponse;
 import com.example.books.ui.adapters.LocationsAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class LocationsFragment extends BaseFragment<FragmentLocationsBinding, LocationsViewModel> {
 
     LocationsAdapter adapter = new LocationsAdapter();
@@ -35,7 +30,6 @@ public class LocationsFragment extends BaseFragment<FragmentLocationsBinding, Lo
     private boolean loading = true;
     private boolean progressBarOne = true;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
-    RickAndMortyRepository repository = new RickAndMortyRepository();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -2,27 +2,22 @@ package com.example.books.ui.fragments.description;
 
 import android.os.Bundle;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.example.books.base.BaseFragment;
-import com.example.books.data.network.retrofit.RetrofitClient;
 import com.example.books.databinding.FragmentDescriptionBinding;
-import com.example.books.models.RickAndMortyCharacter;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import dagger.hilt.android.AndroidEntryPoint;
 
-
+@AndroidEntryPoint
 public class DescriptionFragment extends BaseFragment<FragmentDescriptionBinding, DescriptionViewModel> {
 
+    int id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,10 +28,7 @@ public class DescriptionFragment extends BaseFragment<FragmentDescriptionBinding
     }
 
     private void setupId() {
-        int id = DescriptionFragmentArgs.fromBundle(getArguments()).getGetItemId();
-        Log.e("tag", String.valueOf(id));
-        viewModel.addDescription(id);
-
+         id = DescriptionFragmentArgs.fromBundle(getArguments()).getGetIdDescription();
     }
 
 
@@ -50,13 +42,12 @@ public class DescriptionFragment extends BaseFragment<FragmentDescriptionBinding
 
     private void setupViewModel() {
         viewModel = new ViewModelProvider(requireActivity()).get(DescriptionViewModel.class);
-
     }
 
     @Override
     protected void setupObserve() {
         super.setupObserve();
-        viewModel.characterDescription.observe(getViewLifecycleOwner(), rickAndMortyCharacter -> {
+        viewModel.addDescription(id).observe(getViewLifecycleOwner(), rickAndMortyCharacter -> {
             Glide
                     .with(binding.imageDescription)
                     .load(rickAndMortyCharacter.image)

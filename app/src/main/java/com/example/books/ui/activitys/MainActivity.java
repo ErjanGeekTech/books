@@ -11,6 +11,9 @@ import android.os.Bundle;
 import com.example.books.R;
 import com.example.books.databinding.ActivityMainBinding;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;

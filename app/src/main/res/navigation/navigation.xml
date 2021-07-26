@@ -5,16 +5,6 @@
     android:id="@+id/navigation"
     app:startDestination="@id/characterFragment">
 
-    <fragment
-        android:id="@+id/descriptionFragment"
-        android:name="com.example.books.ui.fragments.description.DescriptionFragment"
-        android:label="Description"
-        tools:layout="@layout/fragment_description" >
-        <argument
-            android:name="get_item_id"
-            app:argType="integer" />
-    </fragment>
-
     <dialog
         android:id="@+id/DIalogFragment"
         android:name="com.example.books.ui.dialogs.DIalogFragment"
@@ -27,8 +17,8 @@
         android:label="Characters"
         tools:layout="@layout/fragment_character">
         <action
-            android:id="@+id/action_characterFragment_to_descriptionFragment"
-            app:destination="@id/descriptionFragment" />
+            android:id="@+id/action_characterFragment_to_descriptionFragment2"
+            app:destination="@id/descriptionFragment2" />
     </fragment>
     <fragment
         android:id="@+id/locationsFragment"
@@ -40,4 +30,13 @@
         android:name="com.example.books.ui.fragments.episodes.EpisodesFragment"
         android:label="Episodes"
         tools:layout="@layout/fragment_episodes" />
+    <fragment
+        android:id="@+id/descriptionFragment2"
+        android:name="com.example.books.ui.fragments.description.DescriptionFragment"
+        android:label="fragment_description"
+        tools:layout="@layout/fragment_description" >
+        <argument
+            android:name="get_id_description"
+            app:argType="integer" />
+    </fragment>
 </navigation>

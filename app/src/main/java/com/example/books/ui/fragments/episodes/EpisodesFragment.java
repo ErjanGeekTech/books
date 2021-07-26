@@ -6,19 +6,15 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.books.App;
-import com.example.books.R;
 import com.example.books.base.BaseFragment;
 import com.example.books.databinding.FragmentEpisodesBinding;
 import com.example.books.models.RickAndMortyEpisodes;
@@ -27,6 +23,9 @@ import com.example.books.ui.adapters.EpisodesAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class EpisodesFragment extends BaseFragment<FragmentEpisodesBinding, EpisodesViewModel> {
 
     EpisodesAdapter adapter = new EpisodesAdapter();

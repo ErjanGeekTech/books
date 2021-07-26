@@ -4,13 +4,19 @@ buildscript {
         google()
         mavenCentral()
     }
-    ext{
-         nav_version = "2.3.5"
+    ext {
+        nav_version = "2.3.5"
+        hilt_version = '2.37'
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.1"
 
+        //NavController
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+
+        //Hilt
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

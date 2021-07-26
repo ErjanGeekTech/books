@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 public class LocationConverter {
     @TypeConverter
     public String fromLocation(Location location){
-        return new Gson().toJson(location);
+        return new Gson().toJson(location); 
     }
     @TypeConverter
     public Location toLocation(String location){

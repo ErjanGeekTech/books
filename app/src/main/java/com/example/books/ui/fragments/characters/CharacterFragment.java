@@ -6,7 +6,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,21 +15,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import com.example.books.base.BaseFragment;
 import com.example.books.databinding.FragmentCharacterBinding;
-import com.example.books.models.RickAndMortyCharacter;
-import com.example.books.models.RickAndMortyResponse;
 import com.example.books.ui.adapters.CharactersAdapter;
 import com.example.books.ui.interfaces.OnItemClick;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import dagger.hilt.android.AndroidEntryPoint;
 
-
+@AndroidEntryPoint
 public class CharacterFragment extends BaseFragment<FragmentCharacterBinding, CharacterViewModel> {
 
     private CharactersAdapter adapter = new CharactersAdapter();
@@ -68,6 +63,7 @@ public class CharacterFragment extends BaseFragment<FragmentCharacterBinding, Ch
         }
     }
     public boolean isNetworkAvailable(){
+
         ConnectivityManager connectivityManager =
                 (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
@@ -133,7 +129,8 @@ public class CharacterFragment extends BaseFragment<FragmentCharacterBinding, Ch
         adapter.setItemClick(new OnItemClick() {
             @Override
             public void onClick(int id, View v) {
-                Navigation.findNavController(v).navigate(CharacterFragmentDirections.actionCharacterFragmentToDescriptionFragment(id).setGetItemId(id));
+//                Navigation.findNavController(v).navigate(CharacterFragmentDirections.actionCharacterFragmentToDescriptionFragment(id).setGetItemId(id));
+                Navigation.findNavController(v).navigate(CharacterFragmentDirections.actionCharacterFragmentToDescriptionFragment2(id).setGetIdDescription(id));
             }
 
             @Override

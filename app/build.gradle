@@ -1,6 +1,11 @@
 plugins {
     id 'com.android.application'
+
+    //Navigation Safe args
     id 'androidx.navigation.safeargs'
+
+    //Hilt
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -77,4 +82,8 @@ dependencies {
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    //Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    annotationProcessor "com.google.dagger:hilt-compiler:$hilt_version"
 }

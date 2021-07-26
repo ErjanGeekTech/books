@@ -9,9 +9,19 @@ import com.example.books.models.RickAndMortyResponse;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
+
+@HiltViewModel
 public class CharacterViewModel extends ViewModel {
 
-    RickAndMortyRepository repository = new RickAndMortyRepository();
+    RickAndMortyRepository repository;
+
+    @Inject
+    public CharacterViewModel(RickAndMortyRepository repository) {
+        this.repository = repository;
+    }
 
     public int chartersPage = 1;
 
