@@ -23,15 +23,17 @@ public class RickAndMortyLocation implements Serializable {
     @SerializedName("dimension")
     public String dimension;
 
-    @SerializedName("residents")
-    @TypeConverters({ResidentsConverter.class})
-    private List<String> residents;
+
 
     @SerializedName("url")
     public String url;
 
     @SerializedName("created")
     public String created;
+
+    @SerializedName("residents")
+    @TypeConverters({ResidentsConverter.class})
+    private List<String> residents;
 
     public Integer getId() {
         return id;

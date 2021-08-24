@@ -42,12 +42,12 @@ public class EpisodesFragment extends BaseFragment<FragmentEpisodesBinding, Epis
         // Inflate the layout for this fragment
         binding = FragmentEpisodesBinding.inflate(inflater, container, false);
         return binding.getRoot();
+
     }
 
     @Override
     protected void setupRequests() {
         super.setupRequests();
-
         fetchEpisodes();
     }
 

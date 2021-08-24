@@ -26,7 +26,6 @@ import dagger.hilt.components.SingletonComponent;
 public class NetworkModule {
 
 
-
     @Singleton
     @Provides
     CharactersApiService provideCharacterApiService(){

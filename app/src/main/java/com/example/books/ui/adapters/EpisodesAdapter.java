@@ -18,7 +18,6 @@ import java.util.List;
 public class EpisodesAdapter extends RecyclerView.Adapter<EpisodesAdapter.EpisodesViewHolder> {
 
     ArrayList<RickAndMortyEpisodes> list =new ArrayList<>();
-    ItemEpisodesBinding binding;
 
     public void addList(List<RickAndMortyEpisodes> getList){
         list.addAll(getList);
@@ -27,8 +26,7 @@ public class EpisodesAdapter extends RecyclerView.Adapter<EpisodesAdapter.Episod
 
     @Override
     public EpisodesViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        binding = ItemEpisodesBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new EpisodesViewHolder(binding.getRoot());
+        return new EpisodesViewHolder(ItemEpisodesBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
@@ -42,8 +40,12 @@ public class EpisodesAdapter extends RecyclerView.Adapter<EpisodesAdapter.Episod
     }
 
     public class EpisodesViewHolder extends RecyclerView.ViewHolder {
-        public EpisodesViewHolder(@NonNull @NotNull View itemView) {
-            super(itemView);
+
+        ItemEpisodesBinding binding;
+
+        public EpisodesViewHolder(@NonNull @NotNull ItemEpisodesBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         public void onBind(RickAndMortyEpisodes rickAndMortyEpisodes) {

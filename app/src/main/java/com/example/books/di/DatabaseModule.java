@@ -32,17 +32,17 @@ public class DatabaseModule {
     @Singleton
     @Provides
     CharacterDao provideCharacterDao(AppDatabase appDatabase){
-        return new RoomClient().provideCharacterDao(appDatabase);
+        return roomClient.provideCharacterDao(appDatabase);
     }
     @Singleton
     @Provides
     LocationDao provideLocationDao(AppDatabase appDatabase){
-        return new RoomClient().provideLocationDao(appDatabase);
+        return roomClient.provideLocationDao(appDatabase);
     }
     @Singleton
     @Provides
     EpisodeDao provideEpisodeDao(AppDatabase appDatabase){
-        return new RoomClient().provideEpisodesDao(appDatabase);
+        return roomClient.provideEpisodesDao(appDatabase);
     }
 
 }

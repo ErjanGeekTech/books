@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.CharactersViewHolder> {
 
-   private ItemCharacterBinding binding;
    public OnItemClick itemClick;
    private ArrayList <RickAndMortyCharacter> list = new ArrayList<>();
 
@@ -33,8 +32,7 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
 
     @Override
     public CharactersViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
-        binding = ItemCharacterBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new CharactersViewHolder(binding.getRoot());
+        return new CharactersViewHolder(ItemCharacterBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     public static DiffUtil.ItemCallback<RickAndMortyCharacter> diffCallback = new DiffUtil.ItemCallback<RickAndMortyCharacter>() {
@@ -61,8 +59,12 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
     }
 
     public class CharactersViewHolder extends RecyclerView.ViewHolder {
-        public CharactersViewHolder(View itemView) {
-            super(itemView);
+
+        private ItemCharacterBinding binding;
+
+        public CharactersViewHolder(ItemCharacterBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         public void onBind(RickAndMortyCharacter item) {

@@ -16,7 +16,6 @@ public class OriginConverter {
     @TypeConverter
     public Origin toOrigin(String origin) {
         return new Gson().fromJson(origin, Origin.class);
-
     }
 
 }

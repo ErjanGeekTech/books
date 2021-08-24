@@ -18,7 +18,6 @@ import java.util.List;
 public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.LocationViewHolder> {
 
     ArrayList<RickAndMortyLocation> list = new ArrayList<>();
-    ItemLocationBinding binding;
 
     public void addList(List<RickAndMortyLocation> getList){
         list.addAll(getList);
@@ -27,8 +26,7 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.Loca
 
     @Override
     public LocationViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        binding = ItemLocationBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new LocationViewHolder(binding.getRoot());
+        return new LocationViewHolder(ItemLocationBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
@@ -42,8 +40,11 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.Loca
     }
 
     public class LocationViewHolder extends RecyclerView.ViewHolder {
-        public LocationViewHolder(@NonNull @NotNull View itemView) {
-            super(itemView);
+        ItemLocationBinding binding;
+
+        public LocationViewHolder(@NonNull @NotNull ItemLocationBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         public void onBind(RickAndMortyLocation rickAndMortyLocation) {
